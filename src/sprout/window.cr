@@ -20,7 +20,7 @@ module Sprout
         end
 
         clear
-        yield self
+        draw_left_text("hello")
         @renderer.present
       end
     end

@@ -15,6 +15,4 @@ end
 
 window = Sprout::Window.new
 
-window.draw do |w|
-  w.draw_left_text("hello")
-end
+window.draw
