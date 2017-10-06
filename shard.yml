@@ -11,3 +11,9 @@ targets:
 crystal: 0.23.1
 
 license: MIT
+
+dependencies:
+  opengl:
+    github: jellymann/crystal_opengl
+  glfw:
+    github: jellymann/crystal_glfw
