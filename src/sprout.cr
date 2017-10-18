@@ -11,6 +11,7 @@ module Sprout
   DARK           = SDL::Color[45, 42, 46, 255]
   LIGHT          = SDL::Color[252, 252, 250, 255]
   FONT_HELVETICA = SDL::TTF::Font.new("/System/Library/Fonts/Helvetica.ttc", 35)
+  FONT_SCPRO     = SDL::TTF::Font.new("/Users/will/Library/Fonts/SourceCodePro-Regular.ttf", 35)
 end
 
 window = Sprout::Window.new
