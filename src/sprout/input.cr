@@ -7,9 +7,8 @@ module Sprout
     getter :blink_visible
     @contents = ""
     @cursor_position = 0
-    @blink_visible = false
+    @blink_visible = true
     @prompt = "→ "
-    @cursor = "_"
 
     def initialize(@foreground, @background)
     end
@@ -24,8 +23,12 @@ module Sprout
         @contents = ""
         @cursor_position = 0
       else
-        @contents = @contents.rchop
+        @contents = @contents[0...@cursor_position].rchop + @contents[@cursor_position..-1]
         @cursor_position -= 1
+      end
+
+      if @cursor_position < 0
+        @cursor_position = 0
       end
     end
 
@@ -33,16 +36,24 @@ module Sprout
     end
 
     def draw_to_surface
-      text_to_draw = @contents
-      if @blink_visible
-        text_to_draw = @contents.insert(@cursor_position, @cursor)
-      end
+      Sprout::FONT_SCPRO.render_shaded(@prompt + @contents, @foreground, @background, false)
+    end
 
-      Sprout::FONT_SCPRO.render_shaded(@prompt + text_to_draw, @foreground, @background, false)
+    def draw_cursor(renderer, rect)
+      return unless @blink_visible
+      renderer.draw_color = @foreground
+      x = 21 * (@cursor_position + 2)
+      renderer.draw_rect(rect.x + x, rect.y, 2, rect.h)
     end
 
     def toggle_blink
       @blink_visible = !@blink_visible
+    end
+
+    def move_cursor(amount : Int32)
+      @cursor_position += amount
+      @cursor_position = @contents.size if @cursor_position > @contents.size
+      @cursor_position = 0 if @cursor_position < 0
     end
   end
 end

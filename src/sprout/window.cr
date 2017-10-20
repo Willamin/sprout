@@ -39,11 +39,16 @@ module Sprout
         when :break
           break
         end
+
         clear
+
         surface = @input.draw_to_surface
         x = 25
         y = (@window.height - surface.height) / 2
         @renderer.copy(surface, dstrect: SDL::Rect[x, y, surface.width, surface.height])
+
+        @input.draw_cursor(@renderer, SDL::Rect[x, y, surface.width, surface.height])
+
         @renderer.present
       end
     end
@@ -68,6 +73,10 @@ module Sprout
     def handle_keyboard_event(event : SDL::Event::Keyboard)
       if (event.keyup? || event.repeat != 0)
         case event.sym
+        when LibSDL::Keycode::LEFT
+          @input.move_cursor -1
+        when LibSDL::Keycode::RIGHT
+          @input.move_cursor +1
         when LibSDL::Keycode::BACKSPACE
           @input.backspace
         when LibSDL::Keycode::RETURN
