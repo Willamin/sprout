@@ -89,7 +89,7 @@ module Sprout
     end
 
     def handle_mouse_event(event : SDL::Event::MouseButton)
-      destination = event.x / 21 - 3
+      destination = (event.x + 6) / 21 - 3
       @input.jump_to(destination)
     end
   end
