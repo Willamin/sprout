@@ -34,7 +34,19 @@ module Sprout
       end
     end
 
-    def click(position)
+    def cursor_bounds
+      if @cursor_position < 0
+        @cursor_position = 0
+      end
+
+      if @cursor_position > @contents.size
+        @cursor_position = @contents.size
+      end
+    end
+
+    def jump_to(position)
+      @cursor_position = position
+      cursor_bounds
     end
 
     def draw_to_surface
