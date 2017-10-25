@@ -45,6 +45,7 @@ module Sprout
     end
 
     def jump_to(position)
+      @blink_visible = true
       @cursor_position = position
       cursor_bounds
     end
@@ -67,8 +68,7 @@ module Sprout
     def move_cursor(amount : Int32)
       @blink_visible = true
       @cursor_position += amount
-      @cursor_position = @contents.size if @cursor_position > @contents.size
-      @cursor_position = 0 if @cursor_position < 0
+      cursor_bounds
     end
   end
 end

@@ -74,9 +74,9 @@ module Sprout
       if (event.keyup? || event.repeat != 0)
         case event.sym
         when LibSDL::Keycode::LEFT
-          @input.move_cursor -1
+          @input.move_cursor(-1)
         when LibSDL::Keycode::RIGHT
-          @input.move_cursor +1
+          @input.move_cursor(+1)
         when LibSDL::Keycode::BACKSPACE
           @input.backspace
         when LibSDL::Keycode::RETURN
@@ -89,9 +89,8 @@ module Sprout
     end
 
     def handle_mouse_event(event : SDL::Event::MouseButton)
-      if event.pressed?
-        # @input.click(event)
-      end
+      destination = event.x / 21 - 3
+      @input.jump_to(destination)
     end
   end
 end
