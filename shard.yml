@@ -16,3 +16,6 @@ dependencies:
   sdl:
     github: ysbaddaden/sdl.cr
     branch: master
+  nth:
+    github: willamin/nth
+    branch: master
